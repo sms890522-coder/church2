@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>빛의교회</title>
+<title>Light Church</title>
 
 <link href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 
 <style>
 :root{
-  --main:#4f46e5;
-  --sub:#22c55e;
-  --bg:#0f172a;
-  --card:#1e293b;
-  --text:#e2e8f0;
+  --main:#6366f1;
+  --bg:#020617;
+  --text:#e5e7eb;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',sans-serif;}
@@ -21,27 +19,7 @@
 body{
   background:var(--bg);
   color:var(--text);
-  scroll-behavior:smooth;
-}
-
-/* HEADER */
-header{
-  position:fixed;
-  width:100%;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  padding:18px 30px;
-  z-index:1000;
-  backdrop-filter:blur(12px);
-  background:rgba(15,23,42,0.7);
-}
-
-nav a{
-  margin-left:20px;
-  text-decoration:none;
-  color:#cbd5f5;
-  font-size:14px;
+  overflow-x:hidden;
 }
 
 /* HERO */
@@ -51,222 +29,157 @@ nav a{
   justify-content:center;
   align-items:center;
   text-align:center;
-  background:
-    radial-gradient(circle at 50% 30%, rgba(79,70,229,0.4), transparent 60%),
-    linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.9)),
-    url('https://images.unsplash.com/photo-1507692049790-de58290a4334') center/cover;
+  position:relative;
+}
+
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0.4;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
 }
 
 .hero h1{
-  font-size:52px;
-  line-height:1.3;
+  font-size:60px;
+  font-weight:700;
 }
 
 .hero p{
-  margin-top:10px;
+  margin-top:15px;
+  font-size:18px;
   color:#cbd5f5;
 }
 
-.btn{
-  margin-top:25px;
-  display:inline-block;
-  padding:14px 22px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#4f46e5,#6366f1);
-  color:#fff;
-  text-decoration:none;
-  font-weight:500;
-}
-
-/* SECTION */
-section{
-  padding:120px 20px;
-  max-width:1100px;
+/* SCROLL SECTION */
+.section{
+  padding:140px 20px;
+  max-width:1000px;
   margin:auto;
 }
 
-h2{
-  font-size:32px;
+.section h2{
+  font-size:36px;
   margin-bottom:20px;
 }
 
-.desc{
-  color:#94a3b8;
-  margin-bottom:40px;
+.fade{
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* CARD */
 .card{
-  background:var(--card);
-  padding:25px;
-  border-radius:18px;
+  background:#111827;
+  padding:30px;
+  border-radius:20px;
+  margin-top:20px;
   transition:0.3s;
-  border:1px solid rgba(255,255,255,0.05);
 }
 
 .card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 40px rgba(0,0,0,0.4);
-}
-
-/* VIDEO */
-.video{
-  position:relative;
-  padding-bottom:56.25%;
-}
-.video iframe{
-  position:absolute;
-  width:100%;
-  height:100%;
-  border-radius:14px;
-}
-
-/* MAP */
-.map iframe{
-  width:100%;
-  height:320px;
-  border-radius:14px;
+  transform:translateY(-10px) scale(1.02);
 }
 
 /* CTA */
 .cta{
+  height:60vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   text-align:center;
-  padding:120px 20px;
-  background:linear-gradient(135deg,#4f46e5,#22c55e);
-  border-radius:30px;
-  margin-top:60px;
+  background:linear-gradient(135deg,#6366f1,#22c55e);
 }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:50px;
-  color:#64748b;
+.cta h2{
+  font-size:40px;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:20px;
+  display:inline-block;
+  padding:14px 22px;
+  background:#fff;
+  color:#000;
+  border-radius:12px;
+  text-decoration:none;
 }
 
 /* TOP */
 #topBtn{
   position:fixed;
-  bottom:25px;
-  right:25px;
+  bottom:20px;
+  right:20px;
   width:45px;
   height:45px;
-  border-radius:50%;
   border:none;
-  background:#4f46e5;
+  border-radius:50%;
+  background:#6366f1;
   color:#fff;
   display:none;
-}
-
-/* MODAL */
-#modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  display:none;
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-box{
-  background:#1e293b;
-  padding:25px;
-  border-radius:12px;
-  width:90%;
-  max-width:400px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h3>빛의교회</h3>
-  <nav>
-    <a href="#about">소개</a>
-    <a href="#service">예배</a>
-    <a href="#youtube">말씀</a>
-    <a href="#notice">공지</a>
-    <a href="#location">오시는길</a>
-  </nav>
-</header>
-
 <div class="hero">
-  <div>
-    <h1>당신을 향한 하나님의 빛</h1>
-    <p>처음 오셔도 괜찮습니다</p>
-    <a href="#about" class="btn">처음 방문하기</a>
+  <video autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-church-5177/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1>당신을 향한 하나님의 계획</h1>
+    <p>이곳에서 시작됩니다</p>
   </div>
 </div>
 
-<section id="about">
-  <h2>교회 소개</h2>
-  <p class="desc">빛의교회는 예배와 사랑으로 사람을 세우는 공동체입니다.</p>
-</section>
+<div class="section fade">
+  <h2>처음 오셨나요?</h2>
+  <p>누구나 편하게 올 수 있는 교회입니다.</p>
+</div>
 
-<section id="service">
+<div class="section fade">
   <h2>예배 안내</h2>
-  <div class="grid">
-    <div class="card"><h3>주일예배</h3><p>오전 11시</p></div>
-    <div class="card"><h3>수요예배</h3><p>오후 7시</p></div>
-    <div class="card"><h3>금요기도회</h3><p>오후 9시</p></div>
-  </div>
-</section>
+  <div class="card">주일예배 오전 11시</div>
+  <div class="card">수요예배 오후 7시</div>
+</div>
 
-<section id="youtube">
+<div class="section fade">
   <h2>설교 영상</h2>
-  <div class="video">
-    <iframe src="https://www.youtube.com/embed/MYdZWLpebzQ" allowfullscreen></iframe>
+  <div class="card">
+    <iframe width="100%" height="300" src="https://www.youtube.com/embed/MYdZWLpebzQ"></iframe>
   </div>
-</section>
-
-<section id="notice">
-  <h2>공지사항</h2>
-  <div class="grid">
-    <div class="card" onclick="openModal('부활절 예배','2026-04-20','특별 예배가 진행됩니다.')">
-      <h3>부활절 예배</h3><p>2026-04-20</p>
-    </div>
-  </div>
-</section>
-
-<section id="location">
-  <h2>오시는 길</h2>
-  <div class="map">
-    <iframe src="https://maps.google.com/maps?q=서울 은평구&t=&z=15&output=embed"></iframe>
-  </div>
-  <a href="https://naver.me/5bCRCHMm" target="_blank" class="btn">길찾기</a>
-</section>
+</div>
 
 <div class="cta">
-  <h2>처음 오신 분들을 환영합니다</h2>
-  <p>누구나 편하게 올 수 있는 교회입니다</p>
+  <div>
+    <h2>이번 주, 한 번 와보세요</h2>
+    <a href="https://naver.me/5bCRCHMm" class="btn">오시는 길</a>
+  </div>
 </div>
-
-<footer>© 2026 빛의교회</footer>
 
 <button id="topBtn">↑</button>
 
-<div id="modal">
-  <div class="modal-box">
-    <h3 id="mTitle"></h3>
-    <p id="mDate"></p>
-    <p id="mBody"></p>
-  </div>
-</div>
-
 <script>
-// 스크롤 이동
-document.querySelectorAll('a[href^="#"]').forEach(link=>{
-  link.addEventListener("click",e=>{
-    e.preventDefault();
-    const t=document.querySelector(link.getAttribute("href"));
-    window.scrollTo({top:t.offsetTop-70,behavior:"smooth"});
+// 애니메이션
+const faders=document.querySelectorAll(".fade");
+window.addEventListener("scroll",()=>{
+  faders.forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight-100){
+      el.classList.add("show");
+    }
   });
 });
 
@@ -276,17 +189,6 @@ window.addEventListener("scroll",()=>{
   topBtn.style.display=window.scrollY>200?"block":"none";
 });
 topBtn.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
-
-// MODAL
-function openModal(t,d,c){
-  modal.style.display="flex";
-  mTitle.innerText=t;
-  mDate.innerText=d;
-  mBody.innerText=c;
-}
-window.onclick=e=>{
-  if(e.target.id==="modal") modal.style.display="none";
-};
 </script>
 
 </body>
