@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>은혜의빛교회</title>
+
+<link href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+
+<style>
+:root{
+  --main:#c9a96e;
+  --bg:#f8f6f1;
+  --dark:#2d2a26;
+  --card:#ffffff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',sans-serif;}
+
+body{background:var(--bg);color:#333;}
+
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  padding:18px 30px;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav a{
+  margin-left:20px;
+  text-decoration:none;
+  color:#333;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.4)),
+    url('https://images.unsplash.com/photo-1507692049790-de58290a4334') center/cover;
+  color:#fff;
+}
+
+.hero h1{font-size:48px;}
+
+.btn{
+  margin-top:20px;
+  display:inline-block;
+  padding:12px 20px;
+  background:var(--main);
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+}
+
+/* SECTION */
+section{
+  padding:100px 20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+h2{margin-bottom:20px;color:var(--dark);}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:var(--card);
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  transition:0.3s;
+  cursor:pointer;
+}
+.card:hover{transform:translateY(-5px);}
+
+/* VIDEO */
+.video{position:relative;padding-bottom:56.25%;}
+.video iframe{position:absolute;width:100%;height:100%;}
+
+/* MAP */
+.map iframe{width:100%;height:300px;border:0;border-radius:12px;}
+
+footer{
+  text-align:center;
+  padding:40px;
+  background:#eee;
+}
+
+/* TOP */
+#topBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--main);
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:45px;
+  height:45px;
+  display:none;
+}
+
+/* MODAL */
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.modal-box{
+  background:#fff;
+  padding:25px;
+  border-radius:10px;
+  width:90%;
+  max-width:400px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h3>은혜의빛교회</h3>
+  <nav>
+    <a href="#about">소개</a>
+    <a href="#service">예배</a>
+    <a href="#youtube">영상</a>
+    <a href="#notice">공지</a>
+    <a href="#location">오시는길</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div>
+    <h1>하나님의 은혜가 머무는 곳</h1>
+    <p>당신을 따뜻하게 맞이합니다</p>
+    <a href="#about" class="btn">교회 소개</a>
+  </div>
+</div>
+
+<section id="about">
+  <h2>교회 소개</h2>
+  <p>우리는 사랑과 말씀으로 세상을 섬깁니다.</p>
+</section>
+
+<section id="service">
+  <h2>예배 안내</h2>
+  <div class="grid" id="services"></div>
+</section>
+
+<section id="youtube">
+  <h2>설교 영상</h2>
+  <div class="video">
+    <iframe src="https://www.youtube.com/embed/MYdZWLpebzQ" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section id="notice">
+  <h2>공지사항</h2>
+  <div class="grid" id="notices"></div>
+</section>
+
+<section id="location">
+  <h2>오시는 길</h2>
+  <div class="map">
+    <iframe src="https://maps.google.com/maps?q=서울 은평구&t=&z=15&output=embed"></iframe>
+  </div>
+  <a href="https://naver.me/5bCRCHMm" target="_blank" class="btn">네이버 길찾기</a>
+</section>
+
+<footer>© 2026 은혜의빛교회</footer>
+
+<button id="topBtn">↑</button>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <h3 id="modalTitle"></h3>
+    <p id="modalDate"></p>
+    <p id="modalBody"></p>
+  </div>
+</div>
+
+<script>
+// ===== 데이터 =====
+const services=[
+  {title:"주일예배",time:"오전 11시"},
+  {title:"수요예배",time:"오후 7시"}
+];
+
+const notices=[
+  {title:"부활절 예배 안내",date:"2026-04-20",content:"특별 예배가 있습니다."},
+  {title:"금요기도회",date:"매주 금요일",content:"기도회 진행됩니다."}
+];
+
+// 렌더링
+services.forEach(s=>{
+  document.getElementById("services").innerHTML+=`
+    <div class="card">
+      <h3>${s.title}</h3>
+      <p>${s.time}</p>
+    </div>`;
+});
+
+notices.forEach(n=>{
+  document.getElementById("notices").innerHTML+=`
+    <div class="card" onclick="openModal('${n.title}','${n.date}','${n.content}')">
+      <h3>${n.title}</h3>
+      <p>${n.date}</p>
+    </div>`;
+});
+
+// 스크롤 이동
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+  link.addEventListener("click",e=>{
+    e.preventDefault();
+    const target=document.querySelector(link.getAttribute("href"));
+    window.scrollTo({top:target.offsetTop-70,behavior:"smooth"});
+  });
+});
+
+// TOP
+const topBtn=document.getElementById("topBtn");
+window.addEventListener("scroll",()=>{
+  topBtn.style.display=window.scrollY>200?"block":"none";
+});
+topBtn.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+
+// 모달
+function openModal(t,d,c){
+  document.getElementById("modal").style.display="flex";
+  modalTitle.innerText=t;
+  modalDate.innerText=d;
+  modalBody.innerText=c;
+}
+window.onclick=e=>{
+  if(e.target.id==="modal") modal.style.display="none";
+};
+</script>
+
+</body>
+</html>
