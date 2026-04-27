@@ -3,192 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Light Church</title>
+<title>GRACE CHURCH</title>
 
 <link href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 
 <style>
-:root{
-  --main:#6366f1;
-  --bg:#020617;
-  --text:#e5e7eb;
-}
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',sans-serif;}
 
 body{
-  background:var(--bg);
-  color:var(--text);
+  background:#0b0f19;
+  color:#fff;
+  line-height:1.6;
   overflow-x:hidden;
 }
 
-/* HERO */
+/* 헤더 */
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:999;
+  backdrop-filter:blur(12px);
+}
+
+.logo{
+  font-weight:700;
+  letter-spacing:-0.5px;
+}
+
+nav a{
+  margin-left:24px;
+  color:#ccc;
+  text-decoration:none;
+  font-size:14px;
+}
+
+nav a:hover{color:#fff;}
+
+/* 히어로 */
 .hero{
   height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   text-align:center;
-  position:relative;
-}
-
-.hero video{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0.4;
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
+  padding:0 20px;
+  background:
+    linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.9)),
+    url('https://images.unsplash.com/photo-1529070538774-1843cb3265df') center/cover;
 }
 
 .hero h1{
-  font-size:60px;
-  font-weight:700;
+  font-size:48px;
+  line-height:1.2;
 }
 
 .hero p{
-  margin-top:15px;
-  font-size:18px;
-  color:#cbd5f5;
+  margin-top:16px;
+  color:#aaa;
 }
 
-/* SCROLL SECTION */
-.section{
-  padding:140px 20px;
-  max-width:1000px;
+.btn{
+  display:inline-block;
+  margin-top:28px;
+  padding:14px 20px;
+  border-radius:10px;
+  background:#4f46e5;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* 섹션 */
+section{
+  padding:100px 20px;
+  max-width:1100px;
   margin:auto;
 }
 
-.section h2{
-  font-size:36px;
-  margin-bottom:20px;
+h2{
+  font-size:32px;
+  margin-bottom:16px;
 }
 
-.fade{
-  opacity:0;
-  transform:translateY(50px);
-  transition:1s;
+.desc{
+  color:#aaa;
+  margin-bottom:40px;
 }
 
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
+/* 카드 */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
 }
 
-/* CARD */
 .card{
   background:#111827;
-  padding:30px;
-  border-radius:20px;
-  margin-top:20px;
+  padding:24px;
+  border-radius:16px;
   transition:0.3s;
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.02);
+  transform:translateY(-6px);
 }
 
-/* CTA */
-.cta{
-  height:60vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:linear-gradient(135deg,#6366f1,#22c55e);
+/* 유튜브 */
+.video{
+  position:relative;
+  padding-bottom:56.25%;
 }
 
-.cta h2{
-  font-size:40px;
-}
-
-/* BUTTON */
-.btn{
-  margin-top:20px;
-  display:inline-block;
-  padding:14px 22px;
-  background:#fff;
-  color:#000;
+.video iframe{
+  position:absolute;
+  width:100%;
+  height:100%;
   border-radius:12px;
-  text-decoration:none;
 }
 
-/* TOP */
-#topBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:45px;
-  height:45px;
-  border:none;
-  border-radius:50%;
-  background:#6366f1;
-  color:#fff;
-  display:none;
+/* 지도 */
+.map iframe{
+  width:100%;
+  height:300px;
+  border-radius:12px;
+}
+
+/* 푸터 */
+footer{
+  padding:60px 20px;
+  text-align:center;
+  color:#777;
+}
+
+/* 반응형 */
+@media(max-width:768px){
+  .hero h1{font-size:28px;}
+  nav{display:none;}
 }
 </style>
 </head>
 
 <body>
 
+<header>
+  <div class="logo">GRACE CHURCH</div>
+  <nav>
+    <a href="#about">소개</a>
+    <a href="#service">예배</a>
+    <a href="#media">미디어</a>
+    <a href="#location">오시는길</a>
+  </nav>
+</header>
+
 <div class="hero">
-  <video autoplay muted loop>
-    <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-church-5177/1080p.mp4" type="video/mp4">
-  </video>
-  <div class="hero-content">
-    <h1>당신을 향한 하나님의 계획</h1>
-    <p>이곳에서 시작됩니다</p>
-  </div>
-</div>
-
-<div class="section fade">
-  <h2>처음 오셨나요?</h2>
-  <p>누구나 편하게 올 수 있는 교회입니다.</p>
-</div>
-
-<div class="section fade">
-  <h2>예배 안내</h2>
-  <div class="card">주일예배 오전 11시</div>
-  <div class="card">수요예배 오후 7시</div>
-</div>
-
-<div class="section fade">
-  <h2>설교 영상</h2>
-  <div class="card">
-    <iframe width="100%" height="300" src="https://www.youtube.com/embed/MYdZWLpebzQ"></iframe>
-  </div>
-</div>
-
-<div class="cta">
   <div>
-    <h2>이번 주, 한 번 와보세요</h2>
-    <a href="https://naver.me/5bCRCHMm" class="btn">오시는 길</a>
+    <h1>하나님의 사랑이 흐르는 교회</h1>
+    <p>당신을 환영합니다</p>
+    <a href="#about" class="btn">교회 알아보기</a>
   </div>
 </div>
 
-<button id="topBtn">↑</button>
+<section id="about">
+  <h2>교회 소개</h2>
+  <p class="desc">우리는 예배와 사랑으로 세상을 섬깁니다.</p>
+</section>
+
+<section id="service">
+  <h2>예배 안내</h2>
+  <div class="grid">
+    <div class="card">주일예배<br>오전 11시</div>
+    <div class="card">수요예배<br>오후 7시</div>
+    <div class="card">새벽기도<br>오전 5시</div>
+  </div>
+</section>
+
+<section id="media">
+  <h2>설교 영상</h2>
+  <div class="video">
+    <iframe src="https://www.youtube.com/embed/MYdZWLpebzQ" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section id="location">
+  <h2>오시는 길</h2>
+  <div class="map">
+    <iframe src="https://maps.google.com/maps?q=seoul&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+  </div>
+</section>
+
+<footer>
+  © 2026 GRACE CHURCH
+</footer>
 
 <script>
-// 애니메이션
-const faders=document.querySelectorAll(".fade");
-window.addEventListener("scroll",()=>{
-  faders.forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight-100){
-      el.classList.add("show");
-    }
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+  link.addEventListener("click", function(e){
+    const target = document.querySelector(this.getAttribute("href"));
+    if(!target) return;
+    e.preventDefault();
+    window.scrollTo({
+      top: target.offsetTop - 60,
+      behavior: "smooth"
+    });
   });
 });
-
-// TOP
-const topBtn=document.getElementById("topBtn");
-window.addEventListener("scroll",()=>{
-  topBtn.style.display=window.scrollY>200?"block":"none";
-});
-topBtn.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
 </script>
 
 </body>
